@@ -1,0 +1,9 @@
+# Защита веток
+branch=$(git symbolic-ref HEAD | sed 's|refs/heads/||')
+if [ "$branch" = "main" ] || [ "$branch" = "develop" ]; then
+  echo "❌ Прямые коммиты в '$branch' запрещены. Создай feature-ветку."
+  exit 1
+fi
+
+# Линтинг и форматирование изменённых файлов
+npx lint-staged
